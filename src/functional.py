@@ -1,70 +1,67 @@
-import random
-random.seed(42)
-
-
-def get_rnd(*args):
-    return random.randint(args[0], args[1])
-
-
-def add(num1, num2):
-    try:
-        return num1 + num2
-    except Exception as e:
-        return str(e)
-
-
-def sub(num1, num2):
-    try:
-        return num1 - num2
-    except Exception as e:
-        return str(e)
-
-
-def mul(num1, num2):
-    try:
-        return num1 * num2
-    except Exception as e:
-        return str(e)
-
-
-def div(num1, num2):
-    try:
-        return int(round(num1 / num2))
-    except Exception as e:
-        return str(e)
-
-
-def pow2(num1, num2):
-    try:
-        return num1 ** 2
-    except Exception as e:
-        return str(e)
-
-
-def sqrt(num1, num2):
-    try:
-        return int(round(num1 ** 0.5))
-    except Exception as e:
-        return str(e)
-
-
-if __name__ == '__main__':
+class MathClassRoom1:
     
-    for exp_r in range(5):
-        random.seed(exp_r)
-    
-        func_list = [add, sub, mul, div, pow2, sqrt]
-        rand_list = []
-        for _ in range(100):
-            rand_list.append(random.choice(func_list))
+    def __init__(self, num_of_items=30):
+        self.num_of_items = num_of_items
+        self.num1 = 30
+        self.num2 = 0
+        self.diff = None
+        self.list_of_correct = []
+        self.list_of_wrong = []
+        self.count_of_operation = 0
+        
+    def _set_correct(self):
+        self.num2 = self.num_of_items - self.num1
+        self.list_of_correct.append(self.num1)
+        self.list_of_correct.append(self.num2)
+            
+    def _set_wrong(self, wrong):
+        self.list_of_wrong.append(wrong)
 
-        num1 = get_rnd(-10, 10)
-        for i in rand_list:
-            num2 = get_rnd(-10, 10)
-            print('input: ', num1, num2)
-            num1 = i(num1, num2)
-            print('function', i.__name__)
-            if isinstance(num1, str):
-                print(num1)
-                break
-            print('-' * 10)
+    def add_(self):
+        try:
+            self.num1 = self.num1 + self.diff
+            self._set_correct()
+        except Exception as e:
+            self._set_wrong(str(e))
+        self.count_of_operation += 1
+
+    def sub_(self):
+        try:
+            self.num1 = self.num1 - self.diff
+            self._set_correct()
+            return self.num1
+        except Exception as e:
+            self._set_wrong(str(e))
+        self.count_of_operation += 1
+
+    def mul_(self):
+        try:
+            self.num1 = self.num1 * self.diff
+            self._set_correct()
+        except Exception as e:
+            self._set_wrong(str(e))
+        self.count_of_operation += 1
+
+    def div_(self):
+        try:
+            self.num1 = self.num1 / self.diff
+            self._set_correct()
+        except Exception as e:
+            self._set_wrong(str(e))
+        self.count_of_operation += 1
+
+    def pow2_(self):
+        try:
+            self.num1 = self.num1 ** 2
+            self._set_correct()
+        except Exception as e:
+            self._set_wrong(str(e))
+        self.count_of_operation += 1
+
+    def sqrt_(self):
+        try:
+            self.num1 = self.num1 ** 0.5
+            self._set_correct()
+        except Exception as e:
+            self._set_wrong(str(e))
+        self.count_of_operation += 1
