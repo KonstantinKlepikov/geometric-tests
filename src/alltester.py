@@ -13,6 +13,8 @@ def get_statistics(room):
     
     print('correct')
     print('count of results: ', len(correct))
+    if int in correct: # FIXME:
+        print('Int: True')
     print('-'*20)
     
     print('wrong')
@@ -69,7 +71,7 @@ def random_walk(n=30):
             rand_list.append(random.choice(method_list_1))
 
         for i in rand_list:
-            room.diff = exp_r #FIXME: 
+            room.diff = random.choice(range(n + 1))
             met = getattr(Room1, i)
             met(room)
             
@@ -81,11 +83,14 @@ if __name__ == '__main__':
     print('All combination')
     room = all_combination()
     get_statistics(room)
+    print('\n')
     
     print('All at random')
     room = all_at_random()
     get_statistics(room)
+    print('\n')
     
     print('Random walk')
     room = random_walk()
     get_statistics(room)
+    print('\n')
