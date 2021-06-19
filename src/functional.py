@@ -65,3 +65,39 @@ class MathClassRoom1:
         except Exception as e:
             self._set_wrong(str(e))
         self.count_of_operation += 1
+
+
+class MathClassRoom2:
+    
+    def __init__(self, heap1=30):
+        self.result_heap = [heap1,]
+        
+    def add_(self, heap1, heap2, diff):
+        
+        self.result_heap[heap1] += diff
+        self.result_heap[heap2] -= diff
+
+    def sub_(self, heap, diff):
+        self.result_heap[heap] -= diff
+        self.result_heap.append(diff)
+
+    def mul_(self, heap1, heap2, coef):
+        
+        self.result_heap[heap2] -= self.result_heap[heap1] * (coef - 1) 
+        self.result_heap[heap1] *= coef
+
+    def div_(self, heap, coef):
+        
+        self.result_heap[heap] /= coef
+        for _ in range(coef - 1):
+            self.result_heap.append(self.result_heap[heap])
+
+    def pow_(self, heap1, heap2, coef):
+        self.result_heap[heap2] -= self.result_heap[heap1] ** (coef - 1)
+        self.result_heap[heap1] **= coef
+
+    def sqrt_(self, heap, coef):
+        
+        self.result_heap.append(self.result_heap[heap] - self.result_heap[heap] ** coef)
+        self.result_heap[heap] **= coef
+    
